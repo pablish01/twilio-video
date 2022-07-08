@@ -76,7 +76,7 @@ let inputStream = null;
 
 const init = async ({ rootDir }) => {
   console.log('rnnoise.init, was initialized = ', initialized);
-  audioContext = new AudioContext({ sampleRate: 48000 });
+  audioContext = new AudioContext();
   const wasmPath = rootDir + '/rnnoise-processor.wasm';
   const processorJSPath = rootDir + '/rnnoise_processor.js';
   console.log({ wasmPath, processorJSPath });
@@ -89,6 +89,10 @@ const isInitialized = () => initialized;
 const connect = stream => {
   if (!isInitialized()) {
     throw new Error('you must call init before connect');
+  }
+  const audioTrack = stream.getTracks().find(track => track.kind === 'audio');
+  if (audioTrack) {
+    console.log('Audio Track Settings: ', JSON.stringify(audioTrack.getSettings(), null, 4));
   }
   sourceNode = audioContext.createMediaStreamSource(stream);
   if (!rnnoiseNode) {
