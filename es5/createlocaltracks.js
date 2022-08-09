@@ -79,7 +79,6 @@ var workaround180748 = require('./webaudio/workaround180748');
 // statement belongs to. Each call to createLocalTracks() increments this
 // counter.
 var createLocalTrackCalls = 0;
-;
 /**
  * Request {@link LocalTrack}s. By default, it requests a
  * {@link LocalAudioTrack} and a {@link LocalVideoTrack}.

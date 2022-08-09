@@ -1183,7 +1183,6 @@ var workaround180748 = require('./webaudio/workaround180748');
 // statement belongs to. Each call to createLocalTracks() increments this
 // counter.
 var createLocalTrackCalls = 0;
-;
 /**
  * Request {@link LocalTrack}s. By default, it requests a
  * {@link LocalAudioTrack} and a {@link LocalVideoTrack}.
@@ -19084,6 +19083,7 @@ var TrackTransceiver = /** @class */ (function (_super) {
 module.exports = TrackTransceiver;
 
 },{"events":169}],117:[function(require,module,exports){
+(function (global){(function (){
 'use strict';
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -19174,7 +19174,7 @@ var WS_CLOSE_NETWORK_CHANGED = 3004;
 var WS_CLOSE_BUSY_WAIT = 3005;
 var WS_CLOSE_SERVER_BUSY = 3006;
 var WS_CLOSE_OPEN_TIMEOUT = 3007;
-var toplevel = globalThis;
+var toplevel = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {};
 var WebSocket = toplevel.WebSocket ? toplevel.WebSocket : require('ws');
 var CloseReason = {
     BUSY: 'busy',
@@ -19736,6 +19736,7 @@ TwilioConnection.CloseReason = CloseReason;
  */
 module.exports = TwilioConnection;
 
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./statemachine":85,"./util":128,"./util/log":132,"./util/networkmonitor":134,"./util/timeout":142,"ws":171}],118:[function(require,module,exports){
 'use strict';
 var defer = require('./').defer;
@@ -21538,6 +21539,7 @@ exports.waitForSometime = waitForSometime;
 exports.waitForEvent = waitForEvent;
 
 },{"../webrtc/util":166,"./constants":122,"./sid":140}],129:[function(require,module,exports){
+(function (global){(function (){
 /* eslint-disable camelcase */
 'use strict';
 var __extends = (this && this.__extends) || (function () {
@@ -21571,7 +21573,7 @@ var getUserAgent = require('..').getUserAgent;
 var MAX_RECONNECT_ATTEMPTS = 5;
 var RECONNECT_INTERVAL_MS = 50;
 var WS_CLOSE_NORMAL = 1000;
-var toplevel = globalThis;
+var toplevel = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {};
 var WebSocket = toplevel.WebSocket ? toplevel.WebSocket : require('ws');
 var _a = require('../constants'), hardwareDevicePublisheriPad = _a.hardwareDevicePublisheriPad, hardwareDevicePublisheriPhone = _a.hardwareDevicePublisheriPhone;
 var util = require('../../util');
@@ -21832,6 +21834,7 @@ function reconnect(publisher, token, sdkName, sdkVersion, roomSid, participantSi
  */
 module.exports = InsightsPublisher;
 
+}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"..":128,"../../util":128,"../browserdetection":120,"../constants":122,"events":169,"ws":171}],130:[function(require,module,exports){
 // eslint-disable-next-line no-warning-comments
 // TODO(mroberts): This should be described as implementing some
@@ -28830,8 +28833,8 @@ module.exports={
   "main": "./es5/index.js",
   "types": "./tsdef/index.d.ts",
   "scripts": {
-    "lint:js": "eslint ./lib ./test/*.js ./docker/**/*.js ./test/framework/*.js ./test/lib/*.js ./test/integration/** ./test/unit/** ",
-    "lint:ts": "eslint ./tsdef/*.ts ./lib/**/*.ts",
+    "lint:js": "eslint ./lib --fix ./test/*.js --fix ./docker/**/*.js --fix ./test/framework/*.js --fix ./test/lib/*.js --fix ./test/integration/** --fix ./test/unit/** --fix",
+    "lint:ts": "eslint ./tsdef/*.ts --fix ./lib/**/*.ts --fix",
     "lint": "npm-run-all lint:js lint:ts",
     "printVersion": "node --version && npm --version",
     "test:unit": "npm-run-all printVersion build:es5 && nyc --report-dir=./coverage --include=lib/**/* --reporter=html --reporter=lcov --reporter=text mocha -r ts-node/register ./test/unit/*",

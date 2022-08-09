@@ -88,7 +88,7 @@ var WS_CLOSE_NETWORK_CHANGED = 3004;
 var WS_CLOSE_BUSY_WAIT = 3005;
 var WS_CLOSE_SERVER_BUSY = 3006;
 var WS_CLOSE_OPEN_TIMEOUT = 3007;
-var toplevel = globalThis;
+var toplevel = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {};
 var WebSocket = toplevel.WebSocket ? toplevel.WebSocket : require('ws');
 var CloseReason = {
     BUSY: 'busy',

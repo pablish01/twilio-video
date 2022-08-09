@@ -31,7 +31,7 @@ var getUserAgent = require('..').getUserAgent;
 var MAX_RECONNECT_ATTEMPTS = 5;
 var RECONNECT_INTERVAL_MS = 50;
 var WS_CLOSE_NORMAL = 1000;
-var toplevel = globalThis;
+var toplevel = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {};
 var WebSocket = toplevel.WebSocket ? toplevel.WebSocket : require('ws');
 var _a = require('../constants'), hardwareDevicePublisheriPad = _a.hardwareDevicePublisheriPad, hardwareDevicePublisheriPhone = _a.hardwareDevicePublisheriPhone;
 var util = require('../../util');
